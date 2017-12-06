@@ -4,7 +4,7 @@ import sys
 print(" WELCOME THE BATTLE OF THE CENTURY!")
 print("The princess of Venice has been kidnapped by the 3 Demons of hell. It is your job to defeat them all in order to save her and bring her back to her thrown.")
 print("Choose your character wisely...")
-print("Select A character" )
+print("Select A character")
 print("Dwarf")
 print("Giant")
 print("Knight")
@@ -52,18 +52,36 @@ def game_over(player):
 
 
 def get_item(player):
-    item_list = ["MRE", "magic potion that has increased your HP",]
+    item_list = ["MRE", "magic potion", "MightySword"]
 
     print("You find a ", item_list[random.randint(0, 2)], "your health increased by ",
     (abs(player['HP'] - 100)), "HP")
     player['HP'] += (abs(player['HP'] - 100))
     return player
 
+    print("You find a ", item_list[random.randint(0, 2)], "your health increased by ",
+    (abs(player['HP'] - 60)), "HP")
+    player['HP'] += (abs(player['HP'] -60))
+    return player
+
+
+def get_items(player):
+    item_list_two = ["Poison", "Disease",]
+
+    print("You have been affected by ", item_list_two[random.randint(0, 3)], "your health decreased by ",
+    (abs(player['HP'] - 50)), "HP")
+    player['HP'] += (abs(player['HP'] - 50))
+    return player
+
+
+
 def attack(opponent):
     rand_damage = random.randint(8, 32)
     opponent['HP'] -= rand_damage
     print(rand_damage, " damage!")
     return opponent
+
+
 
 
 def fight(oppo1, oppo2):
@@ -95,11 +113,20 @@ def encounter(player, opponent):
         get_item(player)
         input('Press any key to continue')
 
+def encounter(player, opponent):
+    if player['HP'] > 40:
+        fight(player, opponent)
+        input('Press any key to continue')
+    elif opponent['name'] == 'Demon Gallows':
+        fight(player, opponent)
+    else:
+         get_items(player)
+         input('Press any key to continue')
+
 
 def main():
-    # fight(player, enemy1)
 
-    # get_item(player)
+
     print('encounter 1...\n\n')
     encounter(player, enemy3)
     print('encounter 2...\n\n')
